@@ -3,6 +3,7 @@ import JsxText from './components/JsxText'
 import StateMgt from './components/StateMgt'
 import EventHandle from './components/EventHandle'
 import ContextTest from './components/ContextTest'
+import Composition from './components/Composition'
 
 
 function App(props) {
@@ -13,6 +14,7 @@ function App(props) {
             <StateMgt />
             <EventHandle />
             <ContextTest />
+            <Composition />
         </div>
     )
 }
