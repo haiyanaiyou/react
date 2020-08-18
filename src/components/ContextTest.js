@@ -6,13 +6,22 @@ const Context = React.createContext();
 const Provider = Context.Provider;
 const Consumer = Context.Consumer;
 
-function Child(props){
+function withConsumer(consumer){
+    return Comp => props => {
+        return   <Consumer>
+                    {value => <Comp {...value} {...props} />}
+                </Consumer>
+    }
+}
+
+const Child = withConsumer(Consumer)(function(props){
     return (
-        <div onClick={()=> props.add()}>
-            {props.counter}
+        <div onClick={()=> props.add()} title={props.name}>
+            {props.counter } {props.name}
         </div>
     )
-}
+})
+
 export default class ContextTest extends Component {
     state={
         counter: 0
@@ -26,9 +35,8 @@ export default class ContextTest extends Component {
         return (
             <div>
                 <Provider value={{counter: this.state.counter, add: this.add}}>
-                    <Consumer>
-                        {value => <Child {...value} />}
-                    </Consumer>
+                    <Child name="foo" />
+                    <Child name="bar" />
                 </Provider>
             </div>
         )
